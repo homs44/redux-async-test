@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { createAction, handleActions } from 'redux-actions'
+import * as ActionTypes from './actionTypes'
 
-const GET_ARTICLE_LIST_REQUEST = 'GET_ARTICLE_LIST_REQUEST';
-const GET_ARTICLE_LIST_SUCCESS = 'GET_ARTICLE_LIST_SUCCESS';
-const GET_ARTICLE_LIST_FAILED = 'GET_ARTICLE_LIST_FAILED';
-
-const getArticleListRequest = createAction(GET_ARTICLE_LIST_REQUEST);
-const getArticleListSuccess = createAction(GET_ARTICLE_LIST_SUCCESS);
-const getArticleListFailed = createAction(GET_ARTICLE_LIST_FAILED);
+const getArticleListRequest = createAction(ActionTypes.GET_ARTICLE_LIST_REQUEST);
+const getArticleListSuccess = createAction(ActionTypes.GET_ARTICLE_LIST_SUCCESS);
+const getArticleListFailed = createAction(ActionTypes.GET_ARTICLE_LIST_FAILED);
 
 export function getArticleList() {
     return (dispatch) => {
@@ -25,13 +22,11 @@ export function getArticleList() {
 }
 
 //delete
-const DELETE_ARTICLE_REQUEST = 'DELETE_ARTICLE_REQUEST';
-const DELETE_ARTICLE_SUCCESS = 'DELETE_ARTICLE_SUCCESS';
-const DELETE_ARTICLE_FAILED = 'DELETE_ARTICLE_FAILED';
 
-const deleteArticleRequest = createAction(DELETE_ARTICLE_REQUEST);
-const deleteArticleSuccess = createAction(DELETE_ARTICLE_SUCCESS);
-const deleteArticleFailed = createAction(DELETE_ARTICLE_FAILED);
+
+const deleteArticleRequest = createAction(ActionTypes.DELETE_ARTICLE_REQUEST);
+const deleteArticleSuccess = createAction(ActionTypes.DELETE_ARTICLE_SUCCESS);
+const deleteArticleFailed = createAction(ActionTypes.DELETE_ARTICLE_FAILED);
 
 export function deleteArticle(id) {
     return (dispatch) => {
@@ -47,7 +42,6 @@ export function deleteArticle(id) {
     }
 }
 
-
 const initialState = {
     isLoading: false,
     isSuccess: false,
@@ -57,14 +51,14 @@ const initialState = {
 }
 
 export default handleActions({
-    GET_ARTICLE_LIST_REQUEST: (state, { payload }) => {
+    [ActionTypes.GET_ARTICLE_LIST_REQUEST]: (state, { payload }) => {
         return Object.assign({}, state, {
             isLoading: true,
             isSuccess: false,
             isFailed: false,
         })
     },
-    GET_ARTICLE_LIST_SUCCESS: (state, { payload }) => {
+    [ActionTypes.GET_ARTICLE_LIST_SUCCESS]: (state, { payload }) => {
         return Object.assign({}, state, {
             isLoading: false,
             isSuccess: true,
@@ -72,7 +66,7 @@ export default handleActions({
             list: [...payload.data]
         })
     },
-    GET_ARTICLE_LIST_FAILED: (state, { payload }) => {
+    [ActionTypes.GET_ARTICLE_LIST_FAILED]: (state, { payload }) => {
         return Object.assign({}, state, {
             isLoading: false,
             isSuccess: false,
@@ -80,21 +74,21 @@ export default handleActions({
             error: payload.error
         })
     },
-    DELETE_ARTICLE_REQUEST: (state, { payload }) => {
+    [ActionTypes.DELETE_ARTICLE_REQUEST]: (state, { payload }) => {
         return Object.assign({}, state, {
             isLoading: true,
             isSuccess: false,
             isFailed: false,
         })
     },
-    DELETE_ARTICLE_SUCCESS: (state, { payload }) => {
+    [ActionTypes.DELETE_ARTICLE_SUCCESS]: (state, { payload }) => {
         return Object.assign({}, state, {
             isLoading: false,
             isSuccess: true,
             isFailed: false,
         })
     },
-    DELETE_ARTICLE_FAILED: (state, { payload }) => {
+    [ActionTypes.DELETE_ARTICLE_FAILED]: (state, { payload }) => {
         return Object.assign({}, state, {
             isLoading: false,
             isSuccess: false,
