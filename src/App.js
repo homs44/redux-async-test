@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getArticleList, deleteArticle } from './store/articleListReducer'
+
+import { bindActionCreators } from 'redux'
+import * as articleListActions from './store/articleListReducer'
 
 class App extends Component {
 
   onSend = () => {
-    this.props.getArticleList();
+    this.props.articleListActions.getArticleList();
   }
 
   render() {
@@ -51,8 +53,10 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getArticleList: () => dispatch(getArticleList()),
-    deleteArticle: (id) => dispatch(deleteArticle(id)),
+    // getArticleList: () => dispatch(articleListActions.getArticleList()),
+    // deleteArticle: (id) => dispatch(articleListActions.deleteArticle(id)),
+
+    articleListActions: bindActionCreators(articleListActions, dispatch)
   }
 }
 
